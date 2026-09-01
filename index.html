@@ -423,24 +423,15 @@
   .map-scroll{ overflow-x:visible; }
   .swipe-hint{ display:none; }
 
-  /* ---- MOBILE VERTICAL: el mapa queda chico + aviso para girar el tel&eacute;fono ---- */
-  @media (max-width:760px) and (orientation:portrait){
-    .swipe-hint{
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:0.5rem;
-      text-align:center;
-      font-family:"IBM Plex Mono", monospace;
-      font-size:0.82rem;
-      letter-spacing:0.02em;
-      color:var(--gold-soft);
-      background:rgba(214,168,90,0.08);
-      border:1px solid var(--hairline-soft);
-      border-radius:10px;
-      padding:0.7rem 1rem;
-      margin-bottom:1rem;
-    }
+  /* En mobile la cancha (el rect&aacute;ngulo azul) tiene que verse siempre
+     apaisada -ancha y corta-, como una cancha de tenis real: los laterales
+     (Este/Oeste, arriba y abajo) son el lado largo, los frontales
+     (Norte/Sur, a los costados) son el lado corto. En desktop el
+     rect&aacute;ngulo se estira para ocupar todo el alto de la columna
+     (align-self:stretch) y queda vertical; en mobile lo forzamos a un
+     ancho/alto fijo (aspect-ratio apaisado) y lo centramos, sin necesidad
+     de girar el tel&eacute;fono. */
+  @media (max-width:760px){
     .map-scroll{ overflow-x:visible; margin:0; padding:0; }
 
     .court-diagram{
@@ -462,7 +453,14 @@
     }
     .zone-count{ font-size:0.6rem; }
 
-    .court-rect{ border-radius:8px; }
+    .court-center{ align-items:center; }
+    .court-rect{
+      align-self:center;
+      width:100%;
+      aspect-ratio:1.9/1;
+      max-height:9rem;
+      border-radius:8px;
+    }
     .court-word{ font-size:0.85rem; }
     .court-logo{ max-width:90px; }
 
@@ -473,38 +471,6 @@
     .umpire-icon{ height:26px; }
     .umpire-chair{ width:14px; height:24px; }
     .bench{ width:24px; height:6px; }
-  }
-
-  /* ---- MOBILE HORIZONTAL: al girar el tel&eacute;fono, la cabecera Norte/Sur
-     queda en los extremos angostos y los laterales Este/Oeste arriba/abajo,
-     igual que en desktop, pero un toque m&aacute;s chico para que entre en el
-     ancho real de un tel&eacute;fono acostado. Si el mapa queda m&aacute;s alto que la
-     pantalla no pasa nada: la p&aacute;gina scrollea vertical como siempre. ---- */
-  @media (max-width:900px) and (orientation:landscape){
-    .swipe-hint{ display:none; }
-    .map-scroll{ overflow-x:visible; margin:0; padding:0; }
-
-    .court-diagram{
-      grid-template-columns:minmax(90px,150px) 1fr minmax(90px,150px);
-      gap:0.7rem;
-      padding:1.4rem 1rem;
-    }
-    .zone-este, .zone-oeste, .zone-norte, .zone-sur{ min-width:0; }
-    .zone-label{ min-width:0; }
-    .zone-label span:first-child{
-      font-size:0.78rem;
-      overflow-wrap:break-word;
-      word-break:break-word;
-    }
-    .zone-count{ font-size:0.78rem; }
-
-    .court-rect{ border-radius:10px; }
-    .court-word{ font-size:1.2rem; }
-    .court-logo{ max-width:150px; }
-
-    .palco-box{ width:2.2rem; height:2.2rem; font-size:0.85rem; border-radius:6px; }
-    .zone-norte .palco-box, .zone-sur .palco-box{ min-height:1.9rem; }
-    .special-label{ font-size:0.62rem; }
   }
 
   /* ---------- PLAYERS ---------- */
@@ -764,7 +730,7 @@
   .experience-list strong{ color:var(--ink); }
   .experience-list em{ color:var(--ink-faint); font-style:normal; }
   @media (max-width:760px){
-    .experience-section h2{ font-size:2.2rem; }
+    .experience-section h2{ font-size:1.65rem; }
     .experience-list{ padding:1.8rem 1.6rem; gap:1.3rem; }
     .experience-list li{ font-size:1.12rem; }
   }
@@ -868,7 +834,6 @@
       <p class="section-note">Dorado es disponible, apagado es reservado. Cada palco se configura para 4, 6 u 8 personas — ver tarifas más abajo.</p>
 
       <div class="map-scroll">
-      <p class="swipe-hint">&#128257; Gir&aacute; el tel&eacute;fono para ver el mapa m&aacute;s grande</p>
       <div class="court-diagram">
         <div class="zone zone-este">
           <div class="zone-label"><span>Palco Lateral Este</span><span class="zone-count" data-count="Lateral Este"></span></div>
