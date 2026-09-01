@@ -410,41 +410,32 @@
   .swipe-hint{ display:none; }
 
   @media (max-width:760px){
-    /* El plano queda apaisado (misma disposici&oacute;n que desktop) y
-       se agranda: en vez de achicarlo para que entre en la pantalla,
-       lo mostramos m&aacute;s grande dentro de un contenedor con scroll
-       horizontal, para que se lea bien. */
-    .map-scroll{
-      overflow-x:auto;
-      -webkit-overflow-scrolling:touch;
-      margin:0 -1.25rem;
-      padding:0 1.25rem 0.6rem;
-    }
-    .swipe-hint{
-      display:block;
-      text-align:center;
-      font-family:"IBM Plex Mono", monospace;
-      font-size:0.82rem;
-      letter-spacing:0.02em;
-      color:var(--gold-soft);
-      margin-bottom:1rem;
-    }
+    /* Mantenemos la forma de cancha (igual que desktop) para que se entienda
+       la ubicaci&oacute;n de cada palco, pero la mostramos m&aacute;s chica en vez de
+       agrandarla: el usuario puede hacer zoom con los dedos si quiere ver
+       el detalle de un palco puntual. */
+    .map-scroll{ overflow-x:visible; margin:0; padding:0; }
+    .swipe-hint{ display:none; }
+
     .court-diagram{
-      grid-template-columns:100px 1fr 100px;
-      min-width:840px;
-      gap:0.8rem;
-      padding:1.8rem 1.3rem;
+      grid-template-columns:minmax(46px,64px) 1fr minmax(46px,64px);
+      gap:0.35rem;
+      padding:1rem 0.6rem;
     }
-    .court-rect{ max-width:none; aspect-ratio:1.7/1; border-radius:10px; }
-    .court-word{ font-size:1.5rem; }
-    .court-logo{ max-width:160px; }
-    .palco-box{ width:3rem; height:3rem; font-size:1.05rem; border-radius:8px; }
-    .zone-norte .palco-box, .zone-sur .palco-box{ min-height:2.7rem; }
-    .zone-label span:first-child{ font-size:0.86rem; }
-    .zone-count{ font-size:0.86rem; }
-    .special-label{ font-size:0.7rem; }
-    .umpire-setup{ gap:1rem; }
-    .umpire-icon{ height:44px; }
+    .court-rect{ max-width:none; aspect-ratio:1.7/1; border-radius:8px; }
+    .court-word{ font-size:0.85rem; }
+    .court-logo{ max-width:90px; }
+    .palco-box{ width:1.5rem; height:1.5rem; font-size:0.6rem; border-radius:4px; }
+    .zone-norte .palco-box, .zone-sur .palco-box{ min-height:1.35rem; }
+    .zone-label{ margin-bottom:0.3rem; }
+    .zone-oeste .zone-label{ margin-top:0.3rem; }
+    .zone-label span:first-child{ font-size:0.58rem; }
+    .zone-count{ font-size:0.58rem; }
+    .special-label{ font-size:0.5rem; }
+    .umpire-setup{ gap:0.5rem; }
+    .umpire-icon{ height:26px; }
+    .umpire-chair{ width:14px; height:24px; }
+    .bench{ width:24px; height:6px; }
   }
 
   /* ---------- PLAYERS ---------- */
