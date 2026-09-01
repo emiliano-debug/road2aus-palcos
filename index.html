@@ -202,6 +202,20 @@
     margin-bottom:2rem;
     font-size:0.95rem;
   }
+  @media (max-width:760px){
+    section h2{
+      text-align:center;
+      font-size:1.95rem;
+    }
+    .section-note{
+      text-align:center;
+      max-width:none;
+      margin-left:auto;
+      margin-right:auto;
+    }
+    .price-card h3{ text-align:center; }
+    .price-desc{ text-align:center; }
+  }
 
   /* ---------- COURT MAP ---------- */
   .court-diagram{
@@ -418,20 +432,35 @@
     .swipe-hint{ display:none; }
 
     .court-diagram{
-      grid-template-columns:minmax(46px,64px) 1fr minmax(46px,64px);
-      gap:0.35rem;
+      grid-template-columns:minmax(54px,76px) 1fr minmax(54px,76px);
+      gap:0.4rem;
       padding:1rem 0.6rem;
     }
-    .court-rect{ max-width:none; aspect-ratio:1.7/1; border-radius:8px; }
+    /* Los items de grid tienen min-width:auto por defecto, lo que hace que
+       el texto largo (ej. "Palco Frontal Sur") empuje la columna m&aacute;s
+       all&aacute; del m&aacute;ximo definido arriba y se desborde/recorte contra el
+       borde de la pantalla. min-width:0 fuerza a que respete la columna. */
+    .zone-este, .zone-oeste, .zone-norte, .zone-sur{ min-width:0; }
+    .zone-label{ min-width:0; margin-bottom:0.3rem; }
+    .zone-oeste .zone-label{ margin-top:0.3rem; }
+    .zone-label span:first-child{
+      font-size:0.6rem;
+      overflow-wrap:break-word;
+      word-break:break-word;
+    }
+    .zone-count{ font-size:0.6rem; }
+
+    /* La cancha no debe tener un alto/ancho fijo (aspect-ratio) porque
+       entra en conflicto con el estirado vertical (align-self:stretch)
+       y termina con el borde sali&eacute;ndose y tapando los palcos de abajo.
+       La dejamos estirarse naturalmente, como en desktop, solo que angosta. */
+    .court-rect{ border-radius:8px; }
     .court-word{ font-size:0.85rem; }
     .court-logo{ max-width:90px; }
-    .palco-box{ width:1.5rem; height:1.5rem; font-size:0.6rem; border-radius:4px; }
-    .zone-norte .palco-box, .zone-sur .palco-box{ min-height:1.35rem; }
-    .zone-label{ margin-bottom:0.3rem; }
-    .zone-oeste .zone-label{ margin-top:0.3rem; }
-    .zone-label span:first-child{ font-size:0.58rem; }
-    .zone-count{ font-size:0.58rem; }
-    .special-label{ font-size:0.5rem; }
+
+    .palco-box{ width:1.6rem; height:1.6rem; font-size:0.62rem; border-radius:4px; }
+    .zone-norte .palco-box, .zone-sur .palco-box{ min-height:1.4rem; }
+    .special-label{ font-size:0.52rem; }
     .umpire-setup{ gap:0.5rem; }
     .umpire-icon{ height:26px; }
     .umpire-chair{ width:14px; height:24px; }
@@ -471,6 +500,7 @@
     max-width:100%;
     border-radius:50%;
     object-fit:cover;
+    object-position:50% 22%;
     border:3px solid var(--gold);
     background:var(--bg-elev-2);
   }
@@ -505,16 +535,16 @@
     font-weight:500;
   }
   @media (max-width:760px){
-    .players-grid{ grid-template-columns:repeat(3, 1fr); gap:2rem 0.8rem; }
-    .player-photo{ width:118px; height:118px; }
-    .placeholder-avatar{ width:72px; height:72px; font-size:1.5rem; }
+    .players-grid{ grid-template-columns:repeat(3, 1fr); gap:2.2rem 0.8rem; }
+    .player-photo{ width:128px; height:128px; }
+    .placeholder-avatar{ width:80px; height:80px; font-size:1.6rem; }
     .player-name{ font-size:0.86rem; }
     .is-placeholder .player-name{ font-size:0.72rem; letter-spacing:-0.01em; }
     .player-rank{ font-size:0.85rem; }
   }
   @media (max-width:460px){
-    .player-photo{ width:100px; height:100px; }
-    .placeholder-avatar{ width:62px; height:62px; font-size:1.3rem; }
+    .player-photo{ width:108px; height:108px; }
+    .placeholder-avatar{ width:68px; height:68px; font-size:1.4rem; }
   }
 
   /* ---------- PRICING ---------- */
