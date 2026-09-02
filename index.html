@@ -444,7 +444,7 @@
     }
 
     .zone-norte, .zone-sur{ display:flex; flex-direction:column; height:auto; }
-    .zone-este, .zone-oeste{ display:flex; flex-direction:column; height:auto; }
+    .zone-este, .zone-oeste{ display:flex; flex-direction:row; align-items:stretch; height:auto; gap:0.35rem; }
 
     /* Los items de grid tienen min-width:auto por defecto, lo que hace que
        el texto largo (ej. "Palco Frontal Sur") empuje la columna m&aacute;s
@@ -452,7 +452,23 @@
        borde de la pantalla. min-width:0 fuerza a que respete la columna. */
     .zone-este, .zone-oeste, .zone-norte, .zone-sur{ min-width:0; }
     .zone-label{ min-width:0; margin-bottom:0.3rem; text-align:center; }
-    .zone-oeste .zone-label{ margin:0.3rem 0 0; }
+
+    /* En Lateral Este/Oeste el texto ("Palco Lateral Este", "8/12
+       disponibles") va girado, corrido al costado de la columna de
+       n&uacute;meros -- as&iacute; no le come alto/ancho a los palcos. */
+    .zone-este .zone-label, .zone-oeste .zone-label{
+      writing-mode:vertical-rl;
+      text-orientation:mixed;
+      margin:0;
+      flex:0 0 auto;
+      display:flex;
+      flex-direction:row;
+      align-items:center;
+      justify-content:center;
+      gap:0.35rem;
+      white-space:nowrap;
+    }
+    .zone-este .zone-boxes, .zone-oeste .zone-boxes{ flex:1 1 auto; min-width:0; }
 
     .zone-label span:first-child{
       display:block;
@@ -512,12 +528,22 @@
     .court-rect{
       align-self:center;
       width:100%;
-      aspect-ratio:2.6/1;
-      max-height:6.2rem;
+      aspect-ratio:2.2/1;
+      max-height:7rem;
       border-radius:8px;
+      overflow:hidden;
     }
     .court-word{ font-size:0.85rem; }
-    .court-logo{ width:60%; max-width:150px; }
+    /* El logo (m&aacute;s alto que ancho en su archivo original) se ajusta por
+       ALTO, no por ancho: as&iacute; nunca se desborda arriba/abajo del
+       recuadro apaisado, que es lo que lo hacía verse "cuadrado". */
+    .court-logo{
+      width:auto;
+      height:82%;
+      max-height:82%;
+      max-width:none;
+      object-fit:contain;
+    }
 
     .umpire-setup{ gap:0.5rem; }
     .umpire-icon{ height:26px; }
