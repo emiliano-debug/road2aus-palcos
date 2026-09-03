@@ -445,6 +445,11 @@
     }
 
     .zone-norte, .zone-sur{ display:flex; flex-direction:column; height:auto; }
+    /* Frontal Sur: el t&iacute;tulo va DESPU&Eacute;S de los n&uacute;meros (abajo), al
+       rev&eacute;s que Frontal Norte, para que quede pegado al borde inferior
+       de la cancha, no al de arriba. */
+    .zone-sur .zone-label{ order:2; margin-bottom:0; margin-top:0.3rem; }
+    .zone-sur .zone-boxes{ order:1; }
     .zone-este, .zone-oeste{ display:flex; flex-direction:row; align-items:stretch; height:auto; gap:0.3rem; }
 
     .zone-este, .zone-oeste, .zone-norte, .zone-sur{ min-width:0; }
@@ -516,16 +521,13 @@
     .palco-slot .palco-box{ width:100%; }
     .special-label{ font-size:0.3rem; }
 
-    .court-center{ align-items:center; width:100%; }
-    /* Ancho completo: el recuadro llega hasta tocar los palcos laterales
-       (Este y Oeste) a los costados. Sigue siendo alto (lados cortos
-       arriba/abajo, como el tel&eacute;fono), pero ahora ocupa todo el ancho
-       disponible de la columna del medio en vez de quedar angosto. */
+    .court-center{ align-items:stretch; width:100%; }
+    /* Ahora la cancha se estira a lo largo de todo el espacio disponible,
+       igualando el alto de los palcos laterales (Este/Oeste), en vez de
+       quedar con un alto fijo mas corto que ellos. */
     .court-rect{
-      align-self:center;
+      align-self:stretch;
       width:100%;
-      height:10rem;
-      max-height:10rem;
       border:2px solid var(--court);
       border-radius:8px;
       background:linear-gradient(180deg, rgba(47,142,201,0.14), rgba(47,142,201,0.04));
