@@ -518,11 +518,15 @@
     .special-label{ font-size:0.3rem; }
 
     .court-center{ align-items:center; width:100%; }
+    /* Invertido 90 grados respecto de antes: ahora los lados CORTOS son
+       arriba/abajo y los lados LARGOS van a los costados -- el recuadro
+       queda alto y angosto, orientado igual que el propio tel&eacute;fono. */
     .court-rect{
       align-self:center;
-      width:100%;
-      aspect-ratio:2.2/1;
-      max-height:7rem;
+      width:auto;
+      height:10rem;
+      max-height:10rem;
+      aspect-ratio:0.45/1;
       border:2px solid var(--court);
       border-radius:8px;
       background:linear-gradient(180deg, rgba(47,142,201,0.14), rgba(47,142,201,0.04));
@@ -530,10 +534,10 @@
     }
     .court-word{ font-size:0.85rem; }
     .court-logo{
-      width:auto;
-      height:82%;
-      max-height:82%;
-      max-width:none;
+      width:82%;
+      height:auto;
+      max-width:82%;
+      max-height:none;
       object-fit:contain;
     }
 
