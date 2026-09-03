@@ -435,7 +435,7 @@
     .map-scroll{ overflow-x:visible; margin:0; padding:0; }
 
     .court-diagram{
-      grid-template-columns:minmax(38px,58px) 1fr minmax(38px,58px);
+      grid-template-columns:minmax(30px,46px) 1fr minmax(30px,46px);
       grid-template-areas:
         "norte  norte  norte"
         "este   court  oeste"
@@ -485,12 +485,15 @@
       width:100%;
       gap:0.3rem;
     }
-    /* Palcos laterales: mas cortos a lo largo (menos alto por casillero y
-       menos separacion) para que la columna ocupe menos y quede mas lugar
-       para la cancha del medio. */
+    /* Palcos laterales: mas angostos pero mas altos (ocupan menos ancho de
+       pantalla, mas largo a lo largo de la cancha). justify-content:
+       space-between reparte el sobrante de alto entre todos los huecos, asi
+       el primer palco (Jugadores) queda pegado a la esquina de arriba y el
+       ultimo a la esquina de abajo -- en los dos lados. */
     .zone-este .zone-boxes, .zone-oeste .zone-boxes{
       flex-direction:column;
       align-items:center;
+      justify-content:space-between;
       width:100%;
       gap:0.08rem;
     }
@@ -512,7 +515,7 @@
     }
     .zone-este .palco-box, .zone-oeste .palco-box{
       flex:none;
-      width:100%; height:0.6rem;
+      width:100%; height:0.85rem;
       min-width:0;
       font-size:0.32rem;
       border-radius:2px;
