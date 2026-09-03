@@ -427,38 +427,30 @@
   .map-scroll{ overflow-x:visible; }
   .swipe-hint{ display:none; }
 
-  /* En mobile el tel&eacute;fono ES la cancha: arriba (donde est&aacute; la
-     c&aacute;mara) = Palco Frontal Norte, abajo (donde carga) = Palco Frontal
-     Sur, y los costados = Laterales Este/Oeste. Por eso el grid de mobile
-     invierte las &aacute;reas de desktop: Norte/Sur pasan a ser franjas
-     horizontales arriba/abajo, y Este/Oeste pasan a ser columnas
-     verticales a los costados. */
+  /* En mobile el telefono ES la cancha: arriba (camara) = Frontal Norte,
+     abajo (carga) = Frontal Sur, costados = Laterales Este/Oeste. El
+     umpire+jugadores va pegado arriba del lateral Este, chico y girado
+     90 grados para orientarse igual que ese costado (mirando al centro). */
   @media (max-width:760px){
     .map-scroll{ overflow-x:visible; margin:0; padding:0; }
 
     .court-diagram{
-      grid-template-columns:minmax(44px,66px) 1fr minmax(44px,66px);
+      grid-template-columns:minmax(38px,58px) 1fr minmax(38px,58px);
       grid-template-areas:
         "norte  norte  norte"
+        "umpire .      ."
         "este   court  oeste"
         "sur    sur    sur";
-      gap:0.5rem;
+      gap:0.4rem;
       padding:1rem 0.6rem;
     }
 
     .zone-norte, .zone-sur{ display:flex; flex-direction:column; height:auto; }
-    .zone-este, .zone-oeste{ display:flex; flex-direction:row; align-items:stretch; height:auto; gap:0.35rem; }
+    .zone-este, .zone-oeste{ display:flex; flex-direction:row; align-items:stretch; height:auto; gap:0.3rem; }
 
-    /* Los items de grid tienen min-width:auto por defecto, lo que hace que
-       el texto largo (ej. "Palco Frontal Sur") empuje la columna m&aacute;s
-       all&aacute; del m&aacute;ximo definido arriba y se desborde/recorte contra el
-       borde de la pantalla. min-width:0 fuerza a que respete la columna. */
     .zone-este, .zone-oeste, .zone-norte, .zone-sur{ min-width:0; }
     .zone-label{ min-width:0; margin-bottom:0.3rem; text-align:center; }
 
-    /* En Lateral Este/Oeste el texto ("Palco Lateral Este", "8/12
-       disponibles") va girado, corrido al costado de la columna de
-       n&uacute;meros -- as&iacute; no le come alto/ancho a los palcos. */
     .zone-este .zone-label, .zone-oeste .zone-label{
       writing-mode:vertical-rl;
       text-orientation:mixed;
@@ -468,25 +460,20 @@
       flex-direction:row;
       align-items:center;
       justify-content:center;
-      gap:0.35rem;
+      gap:0.3rem;
       white-space:nowrap;
     }
     .zone-este .zone-boxes, .zone-oeste .zone-boxes{ flex:1 1 auto; min-width:0; }
 
     .zone-label span:first-child{
       display:block;
-      font-size:0.58rem;
-      line-height:1.25;
+      font-size:0.55rem;
+      line-height:1.2;
       overflow-wrap:break-word;
       word-break:break-word;
     }
-    .zone-count{ font-size:0.58rem; }
+    .zone-count{ font-size:0.55rem; }
 
-    /* Frontal Norte/Sur ahora son filas horizontales (arriba/abajo);
-       Lateral Este/Oeste ahora son columnas verticales (a los costados).
-       flex-wrap:nowrap + flex:1 en cada palco hace que los 10 n&uacute;meros
-       se repartan el ancho disponible y entren siempre en un solo rengl&oacute;n,
-       sin importar el ancho de pantalla. */
     .zone-norte .zone-boxes, .zone-sur .zone-boxes{
       flex-direction:row;
       flex-wrap:nowrap;
@@ -494,11 +481,14 @@
       width:100%;
       gap:0.3rem;
     }
+    /* Palcos laterales: mas cortos a lo largo (menos alto por casillero y
+       menos separacion) para que la columna ocupe menos y quede mas lugar
+       para la cancha del medio. */
     .zone-este .zone-boxes, .zone-oeste .zone-boxes{
       flex-direction:column;
       align-items:center;
       width:100%;
-      gap:0.14rem;
+      gap:0.08rem;
     }
 
     .palco-box{
@@ -518,50 +508,27 @@
     }
     .zone-este .palco-box, .zone-oeste .palco-box{
       flex:none;
-      width:100%; height:0.9rem;
+      width:100%; height:0.6rem;
       min-width:0;
-      font-size:0.44rem;
-      border-radius:3px;
+      font-size:0.32rem;
+      border-radius:2px;
     }
     .palco-slot{ flex:none; width:100%; }
     .palco-slot .palco-box{ width:100%; }
-    .special-label{ font-size:0.4rem; }
+    .special-label{ font-size:0.3rem; }
 
     .court-center{ align-items:center; width:100%; }
-
-    /* El wrapper pasa a ser el unico elemento de grid en la columna del
-       medio (misma area/alto que este y oeste). Al ser flex-column con
-       justify-content:flex-start, agrupa el umpire y la caja del logo uno
-       pegado al otro (sin el hueco raro que se formaba antes) y deja
-       cualquier sobrante de alto simplemente vacio abajo, no en el medio. */
-    .court-umpire-wrap{
-      grid-area:court;
-      display:flex;
-      flex-direction:column;
-      align-items:stretch;
-      justify-content:flex-start;
-      background:linear-gradient(180deg, rgba(47,142,201,0.14), rgba(47,142,201,0.04));
-      border:2px solid var(--court);
-      border-radius:8px;
-      overflow:hidden;
-    }
-    .umpire-row{
-      padding:0.7rem 0.6rem 0.4rem;
-      justify-content:flex-start;
-      border-bottom:1px dashed var(--court-line);
-    }
     .court-rect{
       align-self:center;
       width:100%;
       aspect-ratio:2.2/1;
       max-height:7rem;
-      border:none;
-      border-radius:0;
+      border:2px solid var(--court);
+      border-radius:8px;
+      background:linear-gradient(180deg, rgba(47,142,201,0.14), rgba(47,142,201,0.04));
+      overflow:hidden;
     }
     .court-word{ font-size:0.85rem; }
-    /* El logo (m&aacute;s alto que ancho en su archivo original) se ajusta por
-       ALTO, no por ancho: as&iacute; nunca se desborda arriba/abajo del
-       recuadro apaisado, que es lo que lo hacía verse "cuadrado". */
     .court-logo{
       width:auto;
       height:82%;
@@ -570,10 +537,25 @@
       object-fit:contain;
     }
 
-    .umpire-setup{ gap:0.5rem; }
-    .umpire-icon{ height:26px; }
-    .umpire-chair{ width:14px; height:24px; }
-    .bench{ width:24px; height:6px; }
+    /* Umpire+jugadores pegado arriba del lateral Este, muy chico, girado
+       90 grados (queda orientado igual que la columna de al lado, "mirando"
+       hacia el centro de la cancha en vez de hacia la pantalla). */
+    .umpire-row{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      width:100%;
+      height:2.8rem;
+      padding:0;
+    }
+    .umpire-setup{
+      transform:rotate(90deg);
+      gap:0.2rem;
+    }
+    .umpire-item small{ display:none; }
+    .umpire-icon{ height:14px; }
+    .umpire-chair{ width:7px; height:13px; }
+    .bench{ width:11px; height:3px; }
   }
 
   /* ---------- PLAYERS ---------- */
