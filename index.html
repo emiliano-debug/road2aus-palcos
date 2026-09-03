@@ -438,7 +438,6 @@
       grid-template-columns:minmax(38px,58px) 1fr minmax(38px,58px);
       grid-template-areas:
         "norte  norte  norte"
-        "umpire .      ."
         "este   court  oeste"
         "sur    sur    sur";
       gap:0.4rem;
@@ -535,21 +534,27 @@
     .court-word{ font-size:0.85rem; }
     .court-logo{
       width:auto;
-      height:82%;
-      max-width:82%;
-      max-height:82%;
+      height:41%;
+      max-width:45%;
+      max-height:41%;
       object-fit:contain;
     }
 
-    /* Umpire+jugadores pegado arriba del lateral Este, muy chico, girado
-       90 grados (queda orientado igual que la columna de al lado, "mirando"
-       hacia el centro de la cancha en vez de hacia la pantalla). */
+    /* Umpire+jugadores ahora va ADENTRO de la cancha (comparte la misma
+       celda de grid que court-rect), pegado al lado izquierdo/Este, chico
+       y girado 90 grados. z-index lo deja por encima del fondo celeste. */
     .umpire-row{
+      grid-area:court;
+      position:relative;
+      z-index:2;
+      align-self:center;
+      justify-self:start;
       display:flex;
       align-items:center;
       justify-content:center;
-      width:100%;
+      width:2rem;
       height:2.8rem;
+      margin-left:0.3rem;
       padding:0;
     }
     .umpire-setup{
