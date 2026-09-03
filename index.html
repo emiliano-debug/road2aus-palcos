@@ -525,12 +525,27 @@
     .special-label{ font-size:0.44rem; }
 
     .court-center{ align-items:center; }
+    /* Umpire+jugadores y la caja del logo pasan a ser UN solo bloque: el
+       umpire-row toma el mismo fondo/borde que la cancha, sin borde inferior
+       ni bottom radius, y un margen negativo cierra el gap del grid para que
+       se pegue justo arriba del recuadro del logo (que pierde el borde/radio
+       de arriba). Así queda un &uacute;nico marco continuo. */
+    .umpire-row{
+      background:linear-gradient(180deg, rgba(47,142,201,0.14), rgba(47,142,201,0.04));
+      border:2px solid var(--court);
+      border-bottom:none;
+      border-radius:8px 8px 0 0;
+      box-sizing:border-box;
+      padding:0.7rem 0.6rem 0.4rem;
+      margin-bottom:-0.5rem;
+    }
     .court-rect{
       align-self:center;
       width:100%;
       aspect-ratio:2.2/1;
       max-height:7rem;
-      border-radius:8px;
+      border-top:none;
+      border-radius:0 0 8px 8px;
       overflow:hidden;
     }
     .court-word{ font-size:0.85rem; }
