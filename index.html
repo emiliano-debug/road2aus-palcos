@@ -717,15 +717,34 @@
     padding:0; margin:0;
     border-top:1px solid var(--hairline-soft);
   }
-  .price-tier-label{
-    font-size:0.78rem;
+  .price-tier{
+    border-top:1px solid var(--hairline-soft);
+  }
+  .price-tier:first-of-type{ border-top:none; }
+  .price-tier summary{
+    list-style:none;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0.85rem 0;
+    font-size:0.82rem;
     text-transform:uppercase;
     letter-spacing:0.04em;
     color:var(--gold-soft);
-    margin:1.1rem 0 0.2rem;
     font-weight:600;
   }
-  .price-tier-label:first-of-type{ margin-top:0; }
+  .price-tier summary::-webkit-details-marker{ display:none; }
+  .price-tier summary::after{
+    content:"+";
+    font-family:"IBM Plex Mono", monospace;
+    font-size:1.1rem;
+    font-weight:400;
+    color:var(--ink-faint);
+    transition:transform 0.15s ease;
+  }
+  .price-tier[open] summary::after{ content:"\2212"; }
+  .price-tier .price-list{ border-top:none; padding-bottom:0.6rem; }
   .price-list li{
     display:flex;
     justify-content:space-between;
@@ -813,6 +832,20 @@
   .palco-modal-status.is-reserved{ color:var(--reserved); }
   .palco-modal .price-list{ border-top:1px solid var(--hairline-soft); }
   .palco-modal .price-note{ text-align:left; margin-top:0.9rem; }
+  .palco-modal-weeklabel{
+    font-family:"IBM Plex Mono", monospace;
+    font-size:0.72rem;
+    text-transform:uppercase;
+    letter-spacing:0.05em;
+    color:var(--ink-faint);
+    margin-bottom:0.3rem;
+  }
+  .palco-modal-daylink{ margin-top:0.6rem; }
+  .palco-modal-daylink a{
+    font-size:0.85rem;
+    color:var(--gold-soft);
+    text-decoration:underline;
+  }
   .palco-modal-reserved-msg{
     color:var(--ink-muted);
     font-size:0.92rem;
@@ -831,6 +864,8 @@
     .palco-modal .price-value small{ font-size:0.95rem; }
     .palco-modal .price-note{ font-size:0.95rem; }
     .palco-modal-reserved-msg{ font-size:1.1rem; line-height:1.6; }
+    .palco-modal-weeklabel{ font-size:0.85rem; }
+    .palco-modal-daylink a{ font-size:1rem; }
   }
 
   /* ---------- EXPERIENCE ---------- */
@@ -1043,7 +1078,7 @@
           </div>
           <h3>Palcos Frontales</h3>
           <p class="price-desc">Visibilidad a 2 mts de altura, desde las cabeceras.</p>
-          <h4 class="price-tier-label">4 personas</h4>
+          <details class="price-tier"><summary>4 personas</summary>
           <ul class="price-list">
             <li><span>D&iacute;as 1 y 2 (Octavos/Cuartos)</span><span class="price-value"><strong>$1.75M ARS</strong></span></li>
             <li><span>Semifinal</span><span class="price-value"><strong>$2.5M ARS</strong></span></li>
@@ -1051,8 +1086,8 @@
             <li><span>Abono Octavos y Cuartos</span><span class="price-value"><strong>$3M ARS</strong></span></li>
             <li><span>Abono Semis y Final</span><span class="price-value"><strong>$4M ARS</strong></span></li>
             <li><span>Abono Semanal</span><span class="price-value"><strong>$5M ARS</strong></span></li>
-          </ul>
-          <h4 class="price-tier-label">6 personas</h4>
+          </ul></details>
+          <details class="price-tier"><summary>6 personas</summary>
           <ul class="price-list">
             <li><span>D&iacute;as 1 y 2 (Octavos/Cuartos)</span><span class="price-value"><strong>$2M ARS</strong></span></li>
             <li><span>Semifinal</span><span class="price-value"><strong>$2.75M ARS</strong></span></li>
@@ -1060,11 +1095,11 @@
             <li><span>Abono Octavos y Cuartos</span><span class="price-value"><strong>$3.5M ARS</strong></span></li>
             <li><span>Abono Semis y Final</span><span class="price-value"><strong>$4.75M ARS</strong></span></li>
             <li><span>Abono Semanal</span><span class="price-value"><strong>$6M ARS</strong></span></li>
-          </ul>
-          <h4 class="price-tier-label">8 personas</h4>
+          </ul></details>
+          <details class="price-tier"><summary>8 personas</summary>
           <ul class="price-list">
             <li><span>Consultar tarifa</span><span class="price-value"><strong>$7.5M ARS</strong><small>USD 5.000</small></span></li>
-          </ul>
+          </ul></details>
           <p class="price-note">+ IVA</p>
         </article>
         <article class="price-card">
@@ -1074,7 +1109,7 @@
           </div>
           <h3>Palcos Laterales</h3>
           <p class="price-desc">Visibilidad a altura de cancha, a los costados de la misma.</p>
-          <h4 class="price-tier-label">4 personas</h4>
+          <details class="price-tier"><summary>4 personas</summary>
           <ul class="price-list">
             <li><span>D&iacute;as 1 y 2 (Octavos/Cuartos)</span><span class="price-value"><strong>$1M ARS</strong></span></li>
             <li><span>Semifinal</span><span class="price-value"><strong>$1.5M ARS</strong></span></li>
@@ -1082,8 +1117,8 @@
             <li><span>Abono Octavos y Cuartos</span><span class="price-value"><strong>$1.75M ARS</strong></span></li>
             <li><span>Abono Semis y Final</span><span class="price-value"><strong>$2.75M ARS</strong></span></li>
             <li><span>Abono Semanal</span><span class="price-value"><strong>$4M ARS</strong></span></li>
-          </ul>
-          <h4 class="price-tier-label">6 personas</h4>
+          </ul></details>
+          <details class="price-tier"><summary>6 personas</summary>
           <ul class="price-list">
             <li><span>D&iacute;as 1 y 2 (Octavos/Cuartos)</span><span class="price-value"><strong>$1.5M ARS</strong></span></li>
             <li><span>Semifinal</span><span class="price-value"><strong>$2M ARS</strong></span></li>
@@ -1091,11 +1126,11 @@
             <li><span>Abono Octavos y Cuartos</span><span class="price-value"><strong>$2.75M ARS</strong></span></li>
             <li><span>Abono Semis y Final</span><span class="price-value"><strong>$3.75M ARS</strong></span></li>
             <li><span>Abono Semanal</span><span class="price-value"><strong>$5.5M ARS</strong></span></li>
-          </ul>
-          <h4 class="price-tier-label">8 personas</h4>
+          </ul></details>
+          <details class="price-tier"><summary>8 personas</summary>
           <ul class="price-list">
             <li><span>Consultar tarifa</span><span class="price-value"><strong>$6.25M ARS</strong><small>USD 4.000</small></span></li>
-          </ul>
+          </ul></details>
           <p class="price-note">+ IVA</p>
         </article>
       </div>
@@ -1129,8 +1164,10 @@
     <h3 id="palcoModalTitle"></h3>
     <span class="palco-modal-status" id="palcoModalStatus"></span>
     <p class="palco-modal-reserved-msg" id="palcoModalReservedMsg" hidden>Este palco ya fue reservado. Escribinos a <a href="mailto:hello@agencywegrow.com">hello@agencywegrow.com</a> por otras opciones disponibles.</p>
+    <p class="palco-modal-weeklabel">Precio por semana completa</p>
     <ul class="price-list" id="palcoModalPriceList"></ul>
     <p class="price-note" id="palcoModalNote">+ IVA</p>
+    <p class="palco-modal-daylink"><a href="#pricing-heading">Ver abajo precio por d&iacute;a &darr;</a></p>
   </div>
 </div>
 
