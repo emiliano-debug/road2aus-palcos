@@ -682,6 +682,13 @@
   }
   @media (max-width:760px){
     .pricing-grid{ grid-template-columns:1fr; gap:1.4rem; }
+    .price-list li{ font-size:0.8rem; gap:0.4rem; }
+    .price-list strong{ font-size:0.88rem; }
+    .price-tier summary{ font-size:0.75rem; }
+  }
+  @media (max-width:400px){
+    .price-list li{ font-size:0.72rem; }
+    .price-list strong{ font-size:0.8rem; }
   }
   .price-card{
     background:var(--bg-elev);
@@ -749,15 +756,25 @@
     display:flex;
     justify-content:space-between;
     align-items:center;
+    gap:0.6rem;
     padding:0.6rem 0;
     border-bottom:1px solid var(--hairline-soft);
     font-size:0.92rem;
+  }
+  .price-list li span:first-child{
+    flex:1 1 auto;
+    min-width:0;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
   }
   .price-value{
     display:flex;
     flex-direction:column;
     align-items:flex-end;
     gap:0.1rem;
+    flex-shrink:0;
+    white-space:nowrap;
   }
   .price-list strong{
     font-family:"IBM Plex Mono", monospace;
